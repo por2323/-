@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>الساعة والتاريخ</title>
-  <!-- استيراد خط بيكسلي -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
@@ -20,7 +19,7 @@
     }
 
     .pixel-box {
-      background-color: rgba(0, 0, 0, 0.7); /* خلفية شبه شفافة للصندوق */
+      background-color: rgba(0, 0, 0, 0.7);
       border: 6px solid #00ffcc;
       border-radius: 8px;
       padding: 40px;
@@ -35,7 +34,7 @@
 </head>
 <body>
   <div class="pixel-box">
-    <div id="time">٠٠:٠٠:٠٠</div>
+    <div id="time">٠٠:٠٠:٠٠ ص</div>
     <div id="gregorian">٢٠٢٥/٠٩/٠٣ م</div>
     <div id="hijri">١٤٤٧/٠٢/١٠ هـ</div>
   </div>
@@ -53,8 +52,14 @@
     function updateClock() {
       const now = new Date();
 
-      // الوقت
-      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      // الوقت بنظام 12 ساعة
+      let hours = now.getHours();
+      const minutes = pad(now.getMinutes());
+      const seconds = pad(now.getSeconds());
+      const period = hours >= 12 ? 'م' : 'ص';
+      hours = hours % 12;
+      hours = hours === 0 ? 12 : hours;
+      const time = `${pad(hours)}:${minutes}:${seconds} ${period}`;
       document.getElementById('time').textContent = toArabicNumbers(time);
 
       // التاريخ الميلادي
