@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الساعة والتاريخ</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #00ffcc;
+      font-family: 'Press Start 2P', monospace;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .pixel-box {
+      border: 6px solid #00ffcc;
+      padding: 40px;
+      display: inline-block;
+      background-color: #000;
+    }
+    #time, #gregorian, #hijri {
+      font-size: 32px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixel-box">
+    <div id="time">٠٠:٠٠:٠٠</div>
+    <div id="gregorian">٢٠٢٥/٠٩/٠٣ م</div>
+    <div id="hijri">١٤٤٧/٠٢/١٠ هـ</div>
+  </div>
+
+  <script>
+    function toArabicNumbers(str) {
+      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      return str.replace(/\d/g, d => arabicDigits[d]);
+    }
+
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
+
+    function updateClock() {
+      const now = new Date();
+
+      // الوقت
+      const time = now.toLocaleTimeString('ar-EG');
+      document.getElementById('time').textContent = toArabicNumbers(time);
+
+      // التاريخ الميلادي
+      const gYear = now.getFullYear();
+      const gMonth = pad(now.getMonth() + 1);
+      const gDay = pad(now.getDate());
+      const gregorian = `${gYear}/${gMonth}/${gDay} م`;
+      document.getElementById('gregorian').textContent = toArabicNumbers(gregorian);
+
+      // التاريخ الهجري
+      const hijriParts = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(now);
+
+      const hYear = hijriParts.find(p => p.type === 'year').value;
+      const hMonth = hijriParts.find(p => p.type === 'month').value;
+      const hDay = hijriParts.find(p => p.type === 'day').value;
+      const hijri = `${hYear}/${hMonth}/${hDay} هـ`;
+      document.getElementById('hijri').textContent = toArabicNumbers(hijri);
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
