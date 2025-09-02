@@ -7,23 +7,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
-      background-image: url('https://i.imgur.com/3ZQ3Z3Q.jpg'); /* صورة بحر */
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e'); /* خلفية بحر */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: #00ffcc;
       font-family: 'Press Start 2P', monospace;
       text-align: center;
+      color: #00ffcc;
       padding-top: 100px;
-      margin: 0;
     }
+
     .pixel-box {
+      background-color: rgba(0, 0, 0, 0.7); /* خلفية شبه شفافة للصندوق */
       border: 6px solid #00ffcc;
+      border-radius: 8px;
       padding: 40px;
       display: inline-block;
-      background-color: rgba(0, 0, 0, 0.7); /* خلفية شبه شفافة */
-      border-radius: 8px;
     }
+
     #time, #gregorian, #hijri {
       font-size: 32px;
       margin: 15px 0;
@@ -51,7 +54,7 @@
       const now = new Date();
 
       // الوقت
-      const time = now.toLocaleTimeString('ar-EG');
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
       document.getElementById('time').textContent = toArabicNumbers(time);
 
       // التاريخ الميلادي
