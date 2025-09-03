@@ -2,29 +2,49 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>قديمك عنك</title>
+  <title>قديمك عندك</title>
   <style>
     body {
       background-color: #f4f4f4;
       font-family: 'Courier New', monospace;
       color: #333;
-      text-align: center;
+      margin: 0;
     }
     header {
       background-color: #222;
-      color: #fff;
+      color: #ffcc00;
       padding: 20px;
       font-size: 28px;
+      text-align: center;
       border-bottom: 4px solid #ffcc00;
     }
+    .sidebar {
+      background-color: #fff;
+      padding: 15px;
+      width: 200px;
+      float: right;
+      border-left: 2px solid #ccc;
+    }
+    .sidebar p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .yellow { color: #f4c20d; }
+    .blue { color: #2196f3; }
+    .green { color: #4caf50; }
+
+    .content {
+      margin-right: 220px;
+      padding: 20px;
+    }
     .section {
-      margin: 30px auto;
-      width: 80%;
+      margin-bottom: 40px;
     }
     .section h2 {
       background-color: #ffcc00;
       padding: 10px;
       border-radius: 8px;
+      font-size: 22px;
     }
     .game-card {
       display: inline-block;
@@ -34,6 +54,7 @@
       background-color: #fff;
       border: 2px solid #ccc;
       border-radius: 8px;
+      text-align: center;
     }
     .game-card img {
       width: 100%;
@@ -46,33 +67,46 @@
 </head>
 <body>
 
-<header>🎮 قديمك عنك - متجر ألعاب سوني الكلاسيكية</header>
+<header>🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية</header>
 
-<div class="section">
-  <h2>🕹️ ألعاب سوني 1</h2>
-  <div class="game-card">
-    <img src="ps1-game.jpg" alt="لعبة سوني 1">
-    <p>Crash Bandicoot</p>
-    <p>السعر: 35 ر.س</p>
-  </div>
-  <div class="game-card">
-    <img src="ps1-game2.jpg" alt="لعبة سوني 1">
-    <p>Metal Gear Solid</p>
-    <p>السعر: 40 ر.س</p>
-  </div>
+<div class="sidebar">
+  <p class="yellow">١: ألعاب سوني ١</p>
+  <p class="blue">٢: ألعاب سوني ٢</p>
+  <p class="blue">جهاز سوني ٢</p>
+  <hr>
+  <p class="yellow">١- الباب سريع</p>
+  <p class="blue">٢- الباب بطيء</p>
+  <p class="green">٣- الباب سريع جداً</p>
+  <p class="green">٤- الباب سريع جداً جداً</p>
 </div>
 
-<div class="section">
-  <h2>🎮 ألعاب سوني 2</h2>
-  <div class="game-card">
-    <img src="ps2-game.jpg" alt="لعبة سوني 2">
-    <p>God of War</p>
-    <p>السعر: 50 ر.س</p>
+<div class="content">
+  <div class="section">
+    <h2>🕹️ ألعاب سوني ١</h2>
+    <div class="game-card">
+      <img src="ps1-game.jpg" alt="Crash Bandicoot">
+      <p>Crash Bandicoot</p>
+      <p>٣٥ ر.س</p>
+    </div>
+    <div class="game-card">
+      <img src="ps1-game2.jpg" alt="Metal Gear Solid">
+      <p>Metal Gear Solid</p>
+      <p>٤٠ ر.س</p>
+    </div>
   </div>
-  <div class="game-card">
-    <img src="ps2-game2.jpg" alt="لعبة سوني 2">
-    <p>Shadow of the Colossus</p>
-    <p>السعر: 55 ر.س</p>
+
+  <div class="section">
+    <h2>🎮 ألعاب سوني ٢</h2>
+    <div class="game-card">
+      <img src="ps2-game.jpg" alt="God of War">
+      <p>God of War</p>
+      <p>٥٠ ر.س</p>
+    </div>
+    <div class="game-card">
+      <img src="ps2-game2.jpg" alt="Shadow of the Colossus">
+      <p>Shadow of the Colossus</p>
+      <p>٥٥ ر.س</p>
+    </div>
   </div>
 </div>
 
