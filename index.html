@@ -2,89 +2,79 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>الساعة والتاريخ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>قديمك عنك</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e'); /* خلفية بحر */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      font-family: 'Press Start 2P', monospace;
+      background-color: #f4f4f4;
+      font-family: 'Courier New', monospace;
+      color: #333;
       text-align: center;
-      color: #00ffcc;
-      padding-top: 100px;
     }
-
-    .pixel-box {
-      background-color: rgba(0, 0, 0, 0.7);
-      border: 6px solid #00ffcc;
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      font-size: 28px;
+      border-bottom: 4px solid #ffcc00;
+    }
+    .section {
+      margin: 30px auto;
+      width: 80%;
+    }
+    .section h2 {
+      background-color: #ffcc00;
+      padding: 10px;
       border-radius: 8px;
-      padding: 40px;
-      display: inline-block;
     }
-
-    #time, #gregorian, #hijri {
-      font-size: 32px;
-      margin: 15px 0;
+    .game-card {
+      display: inline-block;
+      width: 200px;
+      margin: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .game-card img {
+      width: 100%;
+      height: auto;
+    }
+    .game-card p {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
-  <div class="pixel-box">
-    <div id="time">٠٠:٠٠:٠٠ ص</div>
-    <div id="gregorian">٢٠٢٥/٠٩/٠٣ م</div>
-    <div id="hijri">١٤٤٧/٠٢/١٠ هـ</div>
+
+<header>🎮 قديمك عنك - متجر ألعاب سوني الكلاسيكية</header>
+
+<div class="section">
+  <h2>🕹️ ألعاب سوني 1</h2>
+  <div class="game-card">
+    <img src="ps1-game.jpg" alt="لعبة سوني 1">
+    <p>Crash Bandicoot</p>
+    <p>السعر: 35 ر.س</p>
   </div>
+  <div class="game-card">
+    <img src="ps1-game2.jpg" alt="لعبة سوني 1">
+    <p>Metal Gear Solid</p>
+    <p>السعر: 40 ر.س</p>
+  </div>
+</div>
 
-  <script>
-    function toArabicNumbers(str) {
-      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-      return str.replace(/\d/g, d => arabicDigits[d]);
-    }
+<div class="section">
+  <h2>🎮 ألعاب سوني 2</h2>
+  <div class="game-card">
+    <img src="ps2-game.jpg" alt="لعبة سوني 2">
+    <p>God of War</p>
+    <p>السعر: 50 ر.س</p>
+  </div>
+  <div class="game-card">
+    <img src="ps2-game2.jpg" alt="لعبة سوني 2">
+    <p>Shadow of the Colossus</p>
+    <p>السعر: 55 ر.س</p>
+  </div>
+</div>
 
-    function pad(n) {
-      return n < 10 ? '0' + n : n;
-    }
-
-    function updateClock() {
-      const now = new Date();
-
-      // الوقت بنظام 12 ساعة
-      let hours = now.getHours();
-      const minutes = pad(now.getMinutes());
-      const seconds = pad(now.getSeconds());
-      const period = hours >= 12 ? 'م' : 'ص';
-      hours = hours % 12;
-      hours = hours === 0 ? 12 : hours;
-      const time = `${pad(hours)}:${minutes}:${seconds} ${period}`;
-      document.getElementById('time').textContent = toArabicNumbers(time);
-
-      // التاريخ الميلادي
-      const gYear = now.getFullYear();
-      const gMonth = pad(now.getMonth() + 1);
-      const gDay = pad(now.getDate());
-      const gregorian = `${gYear}/${gMonth}/${gDay} م`;
-      document.getElementById('gregorian').textContent = toArabicNumbers(gregorian);
-
-      // التاريخ الهجري
-      const hijriParts = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      }).formatToParts(now);
-
-      const hYear = hijriParts.find(p => p.type === 'year').value;
-      const hMonth = hijriParts.find(p => p.type === 'month').value;
-      const hDay = hijriParts.find(p => p.type === 'day').value;
-      const hijri = `${hYear}/${hMonth}/${hDay} هـ`;
-      document.getElementById('hijri').textContent = toArabicNumbers(hijri);
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
 </body>
 </html>
