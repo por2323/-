@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>قديمك عندك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
   <style>
     html {
       scroll-behavior: smooth;
     }
     body {
       background-color: #f4f4f4;
-      font-family: 'Courier New', monospace;
+      font-family: 'Cairo', sans-serif;
       color: #333;
       margin: 0;
     }
@@ -20,6 +21,17 @@
       font-size: 28px;
       text-align: center;
       border-bottom: 4px solid #ffcc00;
+      position: relative;
+    }
+    .cart {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background-color: #ffcc00;
+      color: #222;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
     }
     .sidebar {
       background-color: #fff;
@@ -68,11 +80,27 @@
     .game-card p {
       margin: 5px 0;
     }
+    .add-to-cart {
+      background-color: #ffcc00;
+      color: #222;
+      border: none;
+      padding: 8px 12px;
+      margin-top: 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .add-to-cart:hover {
+      background-color: #e6b800;
+    }
   </style>
 </head>
 <body>
 
-<header>🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية</header>
+<header>
+  🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية
+  <div class="cart">🛒 السلة (0)</div>
+</header>
 
 <div class="sidebar">
   <a href="#devices-ps1" class="yellow">أجهزة سوني ١</a>
@@ -90,11 +118,13 @@
       <img src="driver.jpg" alt="Driver PS1">
       <p>درايفر الجزء الأول</p>
       <p>٣٥ ر.س</p>
+      <button class="add-to-cart">أضف إلى السلة</button>
     </div>
     <div class="game-card">
       <img src="ps1-game2.jpg" alt="Metal Gear Solid">
       <p>Metal Gear Solid</p>
       <p>٤٠ ر.س</p>
+      <button class="add-to-cart">أضف إلى السلة</button>
     </div>
   </div>
 
@@ -104,11 +134,13 @@
       <img src="ps2-game.jpg" alt="Crash PS2">
       <p>كراش الجزء الأول</p>
       <p>٥٠ ر.س</p>
+      <button class="add-to-cart">أضف إلى السلة</button>
     </div>
     <div class="game-card">
       <img src="ps2-game2.jpg" alt="Shadow of the Colossus">
       <p>Shadow of the Colossus</p>
       <p>٥٥ ر.س</p>
+      <button class="add-to-cart">أضف إلى السلة</button>
     </div>
   </div>
 
