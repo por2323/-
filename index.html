@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>قديمك عندك</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background-color: #f4f4f4;
       font-family: 'Courier New', monospace;
@@ -25,9 +28,11 @@
       float: right;
       border-left: 2px solid #ccc;
     }
-    .sidebar p {
+    .sidebar a {
+      display: block;
       font-size: 18px;
       margin: 10px 0;
+      text-decoration: none;
     }
     .yellow { color: #f4c20d; }
     .blue { color: #2196f3; }
@@ -70,20 +75,19 @@
 <header>🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية</header>
 
 <div class="sidebar">
-  <p class="yellow"> أجهزة سوني ١</p>
-  <p class="blue"> أجهزة سوني ٢</p>
-  
-  <p class="yellow"> ألعاب سوني ١</p> 
-  <p class="blue"> ألعاب سوني ٢</p>
-  <p class="green"> ملحقات سوني1</p>
-  <p class="green"> ملحقات سوني2</p>
+  <a href="#devices-ps1" class="yellow">أجهزة سوني ١</a>
+  <a href="#devices-ps2" class="blue">أجهزة سوني ٢</a>
+  <a href="#games-ps1" class="yellow">ألعاب سوني ١</a>
+  <a href="#games-ps2" class="blue">ألعاب سوني ٢</a>
+  <a href="#accessories-ps1" class="green">ملحقات سوني ١</a>
+  <a href="#accessories-ps2" class="green">ملحقات سوني ٢</a>
 </div>
 
 <div class="content">
-  <div class="section">
+  <div class="section" id="games-ps1">
     <h2>🕹️ ألعاب سوني ١</h2>
     <div class="game-card">
-      
+      <img src="driver.jpg" alt="Driver PS1">
       <p>درايفر الجزء الأول</p>
       <p>٣٥ ر.س</p>
     </div>
@@ -94,10 +98,10 @@
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="games-ps2">
     <h2>🎮 ألعاب سوني ٢</h2>
     <div class="game-card">
-      <img src="ps2-game.jpg" alt="God of War">
+      <img src="ps2-game.jpg" alt="Crash PS2">
       <p>كراش الجزء الأول</p>
       <p>٥٠ ر.س</p>
     </div>
@@ -107,16 +111,27 @@
       <p>٥٥ ر.س</p>
     </div>
   </div>
+
+  <div class="section" id="devices-ps1">
+    <h2>🧩 أجهزة سوني ١</h2>
+    <p>جهاز سوني ١ الأصلي - ١٢٠ ر.س</p>
+  </div>
+
+  <div class="section" id="devices-ps2">
+    <h2>🧩 أجهزة سوني ٢</h2>
+    <p>جهاز سوني ٢ سليم - ١٨٠ ر.س</p>
+  </div>
+
+  <div class="section" id="accessories-ps1">
+    <h2>🎮 ملحقات سوني ١</h2>
+    <p>يد تحكم أصلية - ٤٥ ر.س</p>
+  </div>
+
+  <div class="section" id="accessories-ps2">
+    <h2>🎮 ملحقات سوني ٢</h2>
+    <p>كرت ذاكرة ٨ ميجا - ٣٠ ر.س</p>
+  </div>
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
