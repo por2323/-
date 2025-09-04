@@ -24,7 +24,6 @@
       width: 300px;
       border-radius: 8px;
       text-align: center;
-      position: relative;
     }
     .cart-item p {
       margin: 5px 0;
@@ -69,29 +68,47 @@
   const cartContainer = document.getElementById('cart-container');
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+  // تجميع العناصر المتكررة
+  const groupedCart = {};
+  cart.forEach(item => {
+    const key = item.name + '|' + item.price;
+    if (groupedCart[key]) {
+      groupedCart[key].quantity += 1;
+    } else {
+      groupedCart[key] = {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      };
+    }
+  });
+
   function renderCart() {
     cartContainer.innerHTML = '';
-    if (cart.length === 0) {
+    const keys = Object.keys(groupedCart);
+    if (keys.length === 0) {
       cartContainer.innerHTML = '<p class="empty">السلة فارغة حاليًا.</p>';
       return;
     }
 
-    cart.forEach((item, index) => {
+    keys.forEach(key => {
+      const item = groupedCart[key];
       const div = document.createElement('div');
       div.className = 'cart-item';
       div.innerHTML = `
-        <p><strong>${item.name}</strong></p>
+        <p><strong>${item.name}</strong> <span style="color:#888;">x${item.quantity}</span></p>
         <p>${item.price}</p>
-        <button class="remove-btn" onclick="removeItem(${index})">🗑️ حذف</button>
+        <button class="remove-btn" onclick="removeItem('${key}')">🗑️ حذف</button>
       `;
       cartContainer.appendChild(div);
     });
   }
 
-  function removeItem(index) {
-    cart.splice(index, 1);
+  function removeItem(key) {
+    // إزالة كل العناصر المطابقة من السلة
+    cart = cart.filter(item => (item.name + '|' + item.price) !== key);
     localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
+    location.reload(); // إعادة تحميل الصفحة لتحديث العرض
   }
 
   renderCart();
