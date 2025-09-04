@@ -14,6 +14,7 @@
     h1 {
       text-align: center;
       color: #222;
+      margin-bottom: 30px;
     }
     .cart-item {
       background-color: #fff;
@@ -23,27 +24,78 @@
       width: 300px;
       border-radius: 8px;
       text-align: center;
+      position: relative;
     }
     .cart-item p {
       margin: 5px 0;
+    }
+    .remove-btn {
+      background-color: #e53935;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .remove-btn:hover {
+      background-color: #c62828;
     }
     .empty {
       text-align: center;
       color: #999;
       margin-top: 50px;
     }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 20px auto;
+      font-weight: bold;
+      color: #2196f3;
+      text-decoration: none;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
 
+<a href="index.html" class="back-link">🔙 العودة للمتجر</a>
 <h1>🛒 سلة المشتريات</h1>
 <div id="cart-container"></div>
+<a href="index.html" class="back-link">🔙 العودة للمتجر</a>
 
 <script>
   const cartContainer = document.getElementById('cart-container');
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  if (cart.length === 0) {
-    cartContainer.innerHTML = '<p class="empty">السلة فارغة حاليًا.</p>';
-  } else {
-    cart.for
+  function renderCart() {
+    cartContainer.innerHTML = '';
+    if (cart.length === 0) {
+      cartContainer.innerHTML = '<p class="empty">السلة فارغة حاليًا.</p>';
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <p><strong>${item.name}</strong></p>
+        <p>${item.price}</p>
+        <button class="remove-btn" onclick="removeItem(${index})">🗑️ حذف</button>
+      `;
+      cartContainer.appendChild(div);
+    });
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  renderCart();
+</script>
+
+</body>
+</html>
