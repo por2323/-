@@ -5,14 +5,11 @@
   <title>قديمك عندك</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
     body {
       background-color: #f4f4f4;
       font-family: 'Cairo', sans-serif;
-      color: #333;
       margin: 0;
+      color: #333;
     }
     header {
       background-color: #222;
@@ -32,6 +29,7 @@
       padding: 10px 15px;
       border-radius: 8px;
       font-weight: bold;
+      text-decoration: none;
     }
     .sidebar {
       background-color: #fff;
@@ -94,12 +92,27 @@
       background-color: #e6b800;
     }
   </style>
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    window.onload = updateCartCount;
+  </script>
 </head>
 <body>
 
 <header>
   🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية
-  <div class="cart">🛒 السلة (0)</div>
+  <a href="cart.html" class="cart">🛒 السلة (<span id="cart-count">0</span>)</a>
 </header>
 
 <div class="sidebar">
@@ -118,13 +131,13 @@
       <img src="driver.jpg" alt="Driver PS1">
       <p>درايفر الجزء الأول</p>
       <p>٣٥ ر.س</p>
-      <button class="add-to-cart">أضف إلى السلة</button>
+      <button class="add-to-cart" onclick="addToCart('درايفر الجزء الأول', '٣٥ ر.س')">أضف إلى السلة</button>
     </div>
     <div class="game-card">
       <img src="ps1-game2.jpg" alt="Metal Gear Solid">
       <p>Metal Gear Solid</p>
       <p>٤٠ ر.س</p>
-      <button class="add-to-cart">أضف إلى السلة</button>
+      <button class="add-to-cart" onclick="addToCart('Metal Gear Solid', '٤٠ ر.س')">أضف إلى السلة</button>
     </div>
   </div>
 
@@ -134,13 +147,13 @@
       <img src="ps2-game.jpg" alt="Crash PS2">
       <p>كراش الجزء الأول</p>
       <p>٥٠ ر.س</p>
-      <button class="add-to-cart">أضف إلى السلة</button>
+      <button class="add-to-cart" onclick="addToCart('كراش الجزء الأول', '٥٠ ر.س')">أضف إلى السلة</button>
     </div>
     <div class="game-card">
       <img src="ps2-game2.jpg" alt="Shadow of the Colossus">
       <p>Shadow of the Colossus</p>
       <p>٥٥ ر.س</p>
-      <button class="add-to-cart">أضف إلى السلة</button>
+      <button class="add-to-cart" onclick="addToCart('Shadow of the Colossus', '٥٥ ر.س')">أضف إلى السلة</button>
     </div>
   </div>
 
