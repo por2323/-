@@ -30,6 +30,8 @@
       height: auto;
       margin-bottom: 10px;
       border-radius: 6px;
+      image-rendering: pixelated;
+      border: 2px solid #999;
     }
     .cart-item p {
       margin: 5px 0;
@@ -89,10 +91,10 @@
     }
   });
 
-  // دالة للحصول على اسم الصورة حسب اسم المنتج
+  // دالة للحصول على مسار الصورة حسب اسم المنتج
   function getImageSrc(name) {
     const images = {
-      'درايفر الجزء الأول': 'driver.jpg',
+      'درايفر الجزء الأول': 'driver-pixel.jpg',
       'Metal Gear Solid': 'ps1-game2.jpg',
       'كراش الجزء الأول': 'ps2-game.jpg',
       'Shadow of the Colossus': 'ps2-game2.jpg',
@@ -101,7 +103,7 @@
       'يد تحكم أصلية': 'ps1-controller.jpg',
       'كرت ذاكرة ٨ ميجا': 'ps2-memory.jpg'
     };
-    return images[name] || 'default.jpg';
+    return 'images/' + (images[name] || 'default.jpg');
   }
 
   function renderCart() {
