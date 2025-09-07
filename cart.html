@@ -92,7 +92,7 @@
   // دالة للحصول على اسم الصورة حسب اسم المنتج
   function getImageSrc(name) {
     const images = {
-      'درايفر الجزء الأول': 'driver.jpg',
+      'درايفر الجزء الأول': 'driver1.png.png',
       'Metal Gear Solid': 'ps1-game2.jpg',
       'كراش الجزء الأول': 'ps2-game.jpg',
       'Shadow of the Colossus': 'ps2-game2.jpg',
@@ -118,7 +118,7 @@
       const div = document.createElement('div');
       div.className = 'cart-item';
       div.innerHTML = `
-        <img src="${imgSrc}" alt="${item.name}">
+        <img src="${imgSrc}" alt="صورة ${item.name}">
         <p><strong>${item.name}</strong> <span style="color:#888;">x${item.quantity}</span></p>
         <p>${item.price}</p>
         <button class="remove-btn" onclick="removeItem('${key}')">🗑️ حذف</button>
