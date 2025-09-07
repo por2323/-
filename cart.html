@@ -2,190 +2,139 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>قديمك عندك</title>
+  <title>سلة المشتريات</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #f4f4f4;
       font-family: 'Cairo', sans-serif;
-      margin: 0;
+      background-color: #f9f9f9;
+      padding: 20px;
       color: #333;
     }
-    header {
-      background-color: #222;
-      color: #ffcc00;
-      padding: 20px;
-      font-size: 28px;
+    h1 {
       text-align: center;
-      border-bottom: 4px solid #ffcc00;
-      position: relative;
-    }
-    .cart {
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      background-color: #ffcc00;
       color: #222;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
+      margin-bottom: 30px;
     }
-    .sidebar {
-      background-color: #fff;
-      padding: 15px;
-      width: 200px;
-      float: right;
-      border-left: 2px solid #ccc;
-    }
-    .sidebar a {
-      display: block;
-      font-size: 18px;
-      margin: 10px 0;
-      text-decoration: none;
-    }
-    .yellow { color: #f4c20d; }
-    .blue { color: #2196f3; }
-    .green { color: #4caf50; }
-
-    .content {
-      margin-right: 220px;
-      padding: 20px;
-    }
-    .section {
-      margin-bottom: 40px;
-    }
-    .section h2 {
-      background-color: #ffcc00;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 22px;
-    }
-    .game-card {
-      display: inline-block;
-      width: 200px;
-      margin: 10px;
-      padding: 10px;
+    .cart-item {
       background-color: #fff;
       border: 2px solid #ccc;
+      padding: 15px;
+      margin: 10px auto;
+      width: 320px;
       border-radius: 8px;
       text-align: center;
     }
-    .game-card img {
-      width: 100%;
+    .cart-item img {
+      width: 100px;
       height: auto;
+      margin-bottom: 10px;
+      border-radius: 6px;
     }
-    .game-card p {
+    .cart-item p {
       margin: 5px 0;
     }
-    .add-to-cart {
-      background-color: #ffcc00;
-      color: #222;
+    .remove-btn {
+      background-color: #e53935;
+      color: #fff;
       border: none;
-      padding: 8px 12px;
-      margin-top: 8px;
+      padding: 6px 10px;
       border-radius: 6px;
-      font-weight: bold;
       cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
     }
-    .add-to-cart:hover {
-      background-color: #e6b800;
+    .remove-btn:hover {
+      background-color: #c62828;
+    }
+    .empty {
+      text-align: center;
+      color: #999;
+      margin-top: 50px;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 20px auto;
+      font-weight: bold;
+      color: #2196f3;
+      text-decoration: none;
+      font-size: 18px;
     }
   </style>
-  <script>
-    function addToCart(name, price) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.push({ name, price });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      document.getElementById('cart-count').textContent = cart.length;
-    }
-
-    window.onload = updateCartCount;
-  </script>
 </head>
 <body>
 
-<header>
-  🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية
-  <a href="cart.html" class="cart">🛒 السلة (<span id="cart-count">0</span>)</a>
-</header>
+<a href="index.html" class="back-link">🔙 العودة للمتجر</a>
+<h1>🛒 سلة المشتريات</h1>
+<div id="cart-container"></div>
+<a href="index.html" class="back-link">🔙 العودة للمتجر</a>
 
-<div class="sidebar">
-  <a href="#devices-ps1" class="yellow">أجهزة سوني ١</a>
-  <a href="#devices-ps2" class="blue">أجهزة سوني ٢</a>
-  <a href="#games-ps1" class="yellow">ألعاب سوني ١</a>
-  <a href="#games-ps2" class="blue">ألعاب سوني ٢</a>
-  <a href="#accessories-ps1" class="green">ملحقات سوني ١</a>
-  <a href="#accessories-ps2" class="green">ملحقات سوني ٢</a>
-</div>
+<script>
+  const cartContainer = document.getElementById('cart-container');
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-<div class="content">
-  <div class="section" id="games-ps1">
-    <h2>🕹️ ألعاب سوني ١</h2>
+  // تجميع العناصر المتكررة
+  const groupedCart = {};
+  cart.forEach(item => {
+    const key = item.name + '|' + item.price;
+    if (groupedCart[key]) {
+      groupedCart[key].quantity += 1;
+    } else {
+      groupedCart[key] = {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      };
+    }
+  });
 
-    <!-- بطاقة درايفر الجديدة -->
-    <div class="game-card">
-      <img src="driver1.png.png" alt="غلاف لعبة درايفر">
-      <p>درايفر - إصدار كلاسيكي</p>
-      <p>٣٥ ر.س</p>
-      <button class="add-to-cart" onclick="addToCart('درايفر - إصدار كلاسيكي', '٣٥ ر.س')">أضف إلى السلة</button>
-    </div>
+  // دالة للحصول على اسم الصورة حسب اسم المنتج
+  function getImageSrc(name) {
+    const images = {
+      'درايفر الجزء الأول': 'driver1.png.png',
+      'Metal Gear Solid': 'ps1-game2.jpg',
+      'كراش الجزء الأول': 'ps2-game.jpg',
+      'Shadow of the Colossus': 'ps2-game2.jpg',
+      'جهاز سوني ١ الأصلي': 'ps1-console.jpg',
+      'جهاز سوني ٢ سليم': 'ps2-console.jpg',
+      'يد تحكم أصلية': 'ps1-controller.jpg',
+      'كرت ذاكرة ٨ ميجا': 'ps2-memory.jpg'
+    };
+    return images[name] || 'default.jpg';
+  }
 
-    <div class="game-card">
-      <img src="driver.jpg" alt="Driver PS1">
-      <p>درايفر الجزء الأول</p>
-      <p>٣٥ ر.س</p>
-      <button class="add-to-cart" onclick="addToCart('درايفر الجزء الأول', '٣٥ ر.س')">أضف إلى السلة</button>
-    </div>
-    <div class="game-card">
-      <img src="ps1-game2.jpg" alt="Metal Gear Solid">
-      <p>Metal Gear Solid</p>
-      <p>٤٠ ر.س</p>
-      <button class="add-to-cart" onclick="addToCart('Metal Gear Solid', '٤٠ ر.س')">أضف إلى السلة</button>
-    </div>
-  </div>
+  function renderCart() {
+    cartContainer.innerHTML = '';
+    const keys = Object.keys(groupedCart);
+    if (keys.length === 0) {
+      cartContainer.innerHTML = '<p class="empty">السلة فارغة حاليًا.</p>';
+      return;
+    }
 
-  <div class="section" id="games-ps2">
-    <h2>🎮 ألعاب سوني ٢</h2>
-    <div class="game-card">
-      <img src="ps2-game.jpg" alt="Crash PS2">
-      <p>كراش الجزء الأول</p>
-      <p>٥٠ ر.س</p>
-      <button class="add-to-cart" onclick="addToCart('كراش الجزء الأول', '٥٠ ر.س')">أضف إلى السلة</button>
-    </div>
-    <div class="game-card">
-      <img src="ps2-game2.jpg" alt="Shadow of the Colossus">
-      <p>Shadow of the Colossus</p>
-      <p>٥٥ ر.س</p>
-      <button class="add-to-cart" onclick="addToCart('Shadow of the Colossus', '٥٥ ر.س')">أضف إلى السلة</button>
-    </div>
-  </div>
+    keys.forEach(key => {
+      const item = groupedCart[key];
+      const imgSrc = getImageSrc(item.name);
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <img src="${imgSrc}" alt="صورة ${item.name}">
+        <p><strong>${item.name}</strong> <span style="color:#888;">x${item.quantity}</span></p>
+        <p>${item.price}</p>
+        <button class="remove-btn" onclick="removeItem('${key}')">🗑️ حذف</button>
+      `;
+      cartContainer.appendChild(div);
+    });
+  }
 
-  <div class="section" id="devices-ps1">
-    <h2>🧩 أجهزة سوني ١</h2>
-    <p>جهاز سوني ١ الأصلي - ١٢٠ ر.س</p>
-  </div>
+  function removeItem(key) {
+    cart = cart.filter(item => (item.name + '|' + item.price) !== key);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    location.reload();
+  }
 
-  <div class="section" id="devices-ps2">
-    <h2>🧩 أجهزة سوني ٢</h2>
-    <p>جهاز سوني ٢ سليم - ١٨٠ ر.س</p>
-  </div>
-
-  <div class="section" id="accessories-ps1">
-    <h2>🎮 ملحقات سوني ١</h2>
-    <p>يد تحكم أصلية - ٤٥ ر.س</p>
-  </div>
-
-  <div class="section" id="accessories-ps2">
-    <h2>🎮 ملحقات سوني ٢</h2>
-    <p>كرت ذاكرة ٨ ميجا - ٣٠ ر.س</p>
-  </div>
-</div>
+  renderCart();
+</script>
 
 </body>
 </html>
