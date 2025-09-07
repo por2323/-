@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>قديمك عندك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background-color: #222;
+      color: #ffcc00;
+      padding: 20px;
+      font-size: 28px;
+      text-align: center;
+      border-bottom: 4px solid #ffcc00;
+      position: relative;
+    }
+    .cart {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background-color: #ffcc00;
+      color: #222;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .sidebar {
+      background-color: #fff;
+      padding: 15px;
+      width: 200px;
+      float: right;
+      border-left: 2px solid #ccc;
+    }
+    .sidebar a {
+      display: block;
+      font-size: 18px;
+      margin: 10px 0;
+      text-decoration: none;
+    }
+    .yellow { color: #f4c20d; }
+    .blue { color: #2196f3; }
+    .green { color: #4caf50; }
 
+    .content {
+      margin-right: 220px;
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      background-color: #ffcc00;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 22px;
+    }
+    .game-card {
+      display: inline-block;
+      width: 200px;
+      margin: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .game-card img {
+      width: 100%;
+      height: auto;
+    }
+    .game-card p {
+      margin: 5px 0;
+    }
+    .add-to-cart {
+      background-color: #ffcc00;
+      color: #222;
+      border: none;
+      padding: 8px 12px;
+      margin-top: 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .add-to-cart:hover {
+      background-color: #e6b800;
+    }
+  </style>
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    window.onload = updateCartCount;
+  </script>
+</head>
+<body>
+
+<header>
+  🎮 قديمك عندك - متجر ألعاب سوني الكلاسيكية
+  <a href="cart.html" class="cart">🛒 السلة (<span id="cart-count">0</span>)</a>
+</header>
+
+<div class="sidebar">
+  <a href="#devices-ps1" class="yellow">أجهزة سوني ١</a>
+  <a href="#devices-ps2" class="blue">أجهزة سوني ٢</a>
+  <a href="#games-ps1" class="yellow">ألعاب سوني ١</a>
+  <a href="#games-ps2" class="blue">ألعاب سوني ٢</a>
+  <a href="#accessories-ps1" class="green">ملحقات سوني ١</a>
+  <a href="#accessories-ps2" class="green">ملحقات سوني ٢</a>
+</div>
+
+<div class="content">
+  <div class="section" id="games-ps1">
+    <h2>🕹️ ألعاب سوني ١</h2>
+    <div class="game-card">
+      <img src="images/driver.jpg" alt="Driver PS1">
+      <p>درايفر الجزء الأول</p>
+      <p>٣٥ ر.س</p>
+      <button class="add-to-cart" onclick="addToCart('درايفر الجزء الأول', '٣٥ ر.س')">أضف إلى السلة</button>
+    </div>
+    <div class="game-card">
+      <img src="images/ps1-game2.jpg" alt="Metal Gear Solid">
+      <p>Metal Gear Solid</p>
+      <p>٤٠ ر.س</p>
+      <button class="add-to-cart" onclick="addToCart('Metal Gear Solid', '٤٠ ر.س')">أضف إلى السلة</button>
+    </div>
+  </div>
+
+  <div class="section" id="games-ps2">
+    <h2>🎮 ألعاب سوني ٢</h2>
+    <div class="game-card">
+      <img src="images/ps2-game.jpg" alt="Crash PS2">
+      <p>كراش الجزء الأول</p>
+      <p>٥٠ ر.س</p>
+      <button class="add-to-cart" onclick="addToCart('كراش الجزء الأول', '٥٠ ر.س')">أضف إلى السلة</button>
+    </div>
+    <div class="game-card">
+      <img src="images/ps2-game2.jpg" alt="Shadow of the Colossus">
+      <p>Shadow of the Colossus</p>
+      <p>٥٥ ر.س</p>
+      <button class="add-to-cart" onclick="addToCart('Shadow of the Colossus', '٥٥ ر.س')">أضف إلى السلة</button>
+    </div>
+  </div>
+
+  <div class="section" id="devices-ps1">
+    <h2>🧩 أجهزة سوني ١</h2>
+    <p>جهاز سوني ١ الأصلي - ١٢٠ ر.س</p>
+  </div>
+
+  <div class="section" id="devices-ps2">
+    <h2>🧩 أجهزة سوني ٢</h2>
+    <p>جهاز سوني ٢ سليم - ١٨٠ ر.س</p>
+  </div>
+
+  <div class="section" id="accessories-ps1">
+    <h2>🎮 ملحقات سوني ١</h2>
+    <p>يد تحكم أصلية - ٤٥ ر.س</p>
+  </div>
+
+  <div class="section" id="accessories-ps2">
+    <h2>🎮 ملحقات سوني ٢</h2>
+    <p>كرت ذاكرة ٨ ميجا - ٣٠ ر.س</p>
+  </div>
+</div>
+
+</body>
+</html>
